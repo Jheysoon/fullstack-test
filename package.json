@@ -1,0 +1,17 @@
+{
+  "name": "fullstack-test",
+  "private": true,
+  "scripts": {
+    "format": "prettier --write {**/*,*}.{js,ts,jsx,tsx,php}"
+  },
+  "devDependencies": {
+    "husky": "^4.2.5",
+    "prettier": "^2.0.5",
+    "pretty-quick": "^3.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
+  }
+}

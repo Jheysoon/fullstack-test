@@ -1,0 +1,6 @@
+server/vendor
+server/bootstrap
+server/resources
+client/node_modules
+client/public
+node_modules
