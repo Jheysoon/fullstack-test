@@ -14,6 +14,8 @@ import '@testing-library/jest-dom/extend-expect';
 
 import LoginView from '../LoginView';
 
+//https://testing-library.com/docs/react-testing-library/example-intro
+
 it('renders the component correctly', () => {
   render(
     <BrowserRouter>
