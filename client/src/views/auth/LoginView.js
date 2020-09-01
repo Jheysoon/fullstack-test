@@ -8,7 +8,7 @@ import { makeStyles } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -19,11 +19,21 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+const validate = values => {
+  let errors = {};
+
+  if (values.email) {
+    errors.email = 'Required';
+  }
+
+  return errors;
+};
+
 // https://github.com/devias-io/react-material-dashboard
 
 const LoginView = () => {
   const classes = useStyles();
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
 
   return (
     <div className={classes.root} title="Login">
@@ -39,9 +49,9 @@ const LoginView = () => {
               email: '',
               password: '',
             }}
-            validate={{}}
+            validate={validate}
             onSubmit={() => {
-              navigate('/app/dashboard', { replace: true });
+              //navigate('/app/dashboard', { replace: true });
             }}
           >
             {({
@@ -53,7 +63,7 @@ const LoginView = () => {
               touched,
               values,
             }) => (
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmit} data-testid="login-form">
                 <Box mb={3}>
                   <Typography color="textPrimary" variant="h2">
                     Sign in
@@ -66,7 +76,15 @@ const LoginView = () => {
                     Sign in on the internal platform
                   </Typography>
                 </Box>
-                <TextField
+                <label htmlFor="email">Email Address</label>
+                <input
+                  name="email"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  type="email"
+                  value={values.email}
+                />
+                {/* <TextField
                   error={Boolean(touched.email && errors.email)}
                   fullWidth
                   helperText={touched.email && errors.email}
@@ -78,7 +96,11 @@ const LoginView = () => {
                   type="email"
                   value={values.email}
                   variant="outlined"
-                />
+                /> */}
+
+                {Boolean(touched.email && errors.email) && (
+                  <div>{errors.email}</div>
+                )}
                 <TextField
                   error={Boolean(touched.password && errors.password)}
                   fullWidth
